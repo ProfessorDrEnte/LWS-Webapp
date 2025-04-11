@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Paket" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "gewicht" REAL NOT NULL,
+    "erstellt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
