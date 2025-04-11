@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/@prisma/client"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -17,6 +17,6 @@ datasource db {
 model Paket {
   id        Int      @id @default(autoincrement())
   name      String
-  gewicht   Float
+  anzahl    Int      @default(1)
   erstellt  DateTime @default(now())
 }
