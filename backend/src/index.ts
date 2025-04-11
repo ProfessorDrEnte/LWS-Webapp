@@ -18,12 +18,37 @@ app.get('/pakete', async (_req, res) => {
 
 // POST: Neues Paket anlegen
 app.post('/pakete', async (req, res) => {
-    const { name, anzahl } = req.body
-    const neuesPaket = await prisma.paket.create({
-      data: { name, anzahl }
-    })
-    res.json(neuesPaket)
+    const {
+      name,
+      anzahl,
+      empfaenger,
+      adresse,
+      absender,
+      versanddatum,
+      barcode,
+      foto
+    } = req.body
+  
+    try {
+      const neuesPaket = await prisma.paket.create({
+        data: {
+          name,
+          anzahl,
+          empfaenger,
+          adresse,
+          absender,
+          versanddatum: new Date(versanddatum), // Konvertierung von String zu Date
+          barcode,
+          foto,
+        }
+      })
+      res.json(neuesPaket)
+    } catch (error) {
+      console.error('Fehler beim Anlegen des Pakets:', error)
+      res.status(500).json({ error: 'Serverfehler beim Anlegen des Pakets.' })
+    }
   })
+  
   
 // Root-Route
 app.get('/', (_: express.Request, res: express.Response) => {
